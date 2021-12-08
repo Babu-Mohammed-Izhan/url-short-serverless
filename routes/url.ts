@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import urlService from "../service/urlservice";
-import { Url } from "../types";
 
 const router = express.Router();
 
