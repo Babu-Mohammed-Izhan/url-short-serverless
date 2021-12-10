@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Url } from "./../types";
 import { Schema, model } from "mongoose";
 

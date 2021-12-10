@@ -11,11 +11,17 @@ router.get("/", (_req: Request, res: Response) => {
 
 router.get("/:id", (req: Request, res: Response) => {
   const id = req.params.id;
-  const urls = urlService.getOneUrl(id);
-  if (!urls) {
-    res.status(404).send("Url is not available");
-  }
-  res.redirect(`${urls.fullUrl}`);
+  urlService
+    .getOneUrl(id)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send("Url is not available");
+      }
+      res.redirect(`${data.fullUrl}`);
+    })
+    .catch((_err) => {
+      console.log("Url is Missing");
+    });
 });
 
 router.post("/", (req: Request, res: Response) => {

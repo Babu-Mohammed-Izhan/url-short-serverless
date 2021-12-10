@@ -1,13 +1,12 @@
 import { Url } from "../types";
 import UrlModel from "../models/url.model";
-import {} from "../utils";
 
 const getUrls = async (): Promise<Url[]> => {
   const urls = await UrlModel.find({});
   return urls;
 };
 
-const getOneUrl = async (short: string): Url => {
+const getOneUrl = async (short: string): Promise<Url> => {
   const url = await UrlModel.findOne({ shortUrl: short });
   url && url.count++;
   if (!url) {
