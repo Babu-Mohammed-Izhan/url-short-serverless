@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import urlService from "../service/urlservice";
-import { parseString, toUrl } from "../utils";
+import { toUrl } from "../utils";
+import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
@@ -25,15 +26,13 @@ router.get("/:id", (req: Request, res: Response) => {
 });
 
 router.post("/", (req: Request, res: Response) => {
-  const fullUrl = toUrl(req.body);
+  const fullUrl: string = toUrl(req.body);
 
-  const fullUrl2 = parseString(fullUrl);
-
-  const shortUrl = "arwsaf";
+  const shortUrl: string = uuidv4();
 
   const count = 0;
 
-  const url = urlService.postUrls({ fullUrl: fullUrl2, shortUrl, count });
+  const url = urlService.postUrls({ fullUrl, shortUrl, count });
 
   res.status(201).send(url);
 });
