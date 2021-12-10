@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import urlService from "../controller/urlservice";
+import urlService from "../service/urlservice";
 import { parseString, toUrl } from "../utils";
 
 const router = express.Router();

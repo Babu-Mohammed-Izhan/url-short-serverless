@@ -1,7 +1,7 @@
 "use strict";
 import express from "express";
 import cors from "cors";
-import urlRouter from "./routes/url";
+import urlRouter from "./controller/url";
 import mongoose from "mongoose";
 // import serverless from 'serverless-http';
 
