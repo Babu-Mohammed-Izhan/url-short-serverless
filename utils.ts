@@ -1,3 +1,5 @@
+import { Url, UrlInput } from "./types";
+
 const isNumber = (num: unknown): num is number => {
   return typeof num === "number";
 };
@@ -32,4 +34,16 @@ const parseDate = (date: unknown): string => {
   return date;
 };
 
-export { parseDate, parseString, parseNumber };
+const toUrl = (fullUrl: unknown): string => {
+  const url = parseString(fullUrl);
+  return url;
+};
+
+const parseUrl = ({ fullUrl, shortUrl, count }: UrlInput): Url => {
+  const fullUrlinput = toUrl(fullUrl);
+  const shortUrlinput = parseString(shortUrl);
+  const countinput = parseNumber(count);
+  return { fullUrl: fullUrlinput, shortUrl: shortUrlinput, count: countinput };
+};
+
+export { parseDate, parseString, parseNumber, toUrl, parseUrl };

@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
-import urlService from "../service/urlservice";
+import urlService from "../controller/urlservice";
+import { parseString, toUrl } from "../utils";
 
 const router = express.Router();
 
@@ -8,25 +9,19 @@ router.get("/", (_req: Request, res: Response) => {
   res.status(200).send(urls);
 });
 
-const isString = (text: unknown): text is string => {
-  return typeof text === "string";
-};
-
-const seeIfString = (url: unknown): string => {
-  if (!url || !isString(url)) {
-    throw new Error("Incorrect or missing input");
+router.get("/:id", (req: Request, res: Response) => {
+  const id = req.params.id;
+  const urls = urlService.getOneUrl(id);
+  if (!urls) {
+    res.status(404).send("Url is not available");
   }
-  return url;
-};
-
-const toUrl = (fullUrl: unknown): string => {
-  return seeIfString(fullUrl);
-};
+  res.redirect(`${urls.fullUrl}`);
+});
 
 router.post("/", (req: Request, res: Response) => {
   const fullUrl = toUrl(req.body);
 
-  const fullUrl2 = seeIfString(fullUrl);
+  const fullUrl2 = parseString(fullUrl);
 
   const shortUrl = "arwsaf";
 
