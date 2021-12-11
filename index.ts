@@ -5,7 +5,6 @@ import express from "express";
 import cors from "cors";
 import urlRouter from "./controller/url";
 import mongoose from "mongoose";
-import serverless from "serverless-http";
 
 const app = express();
 app.use(cors());
@@ -26,6 +25,6 @@ app.get("/api/ping", (_req, res) => {
   res.send("pong");
 });
 
-module.exports.handler = serverless(app);
-
-export { app };
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
+});
